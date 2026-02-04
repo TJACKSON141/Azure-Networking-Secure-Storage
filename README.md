@@ -1,84 +1,120 @@
-# Azure Networking & Secure Storage Lab (AZ-104)
+# 🚀 Project 2 – Azure Networking & Secure Storage (AZ-104)
 
-## Overview
-This project demonstrates how to design a secure Azure network, isolate workloads using subnets and NSGs, deploy a private Azure Storage Account with encryption and Private Endpoints, and automate deployments using ARM templates. The goal is to mirror real-world networking and storage governance practices aligned with AZ-104.
-
-## Architecture
-- Virtual Network with two subnets (Web, Database)
-- Network Security Group attached to Web subnet
-- Azure Storage Account (private access only)
-- Private Endpoint in Database subnet
-- Microsoft-managed encryption
-- ARM Templates (exported and redeployed)
-- Secure access via SAS (Storage Explorer / AzCopy)
-
-## Implementation
-
-### 1. Cost Guardrails
-A subscription budget was used to ensure this lab stayed within safe spend limits.
-
-
+## 📌 Overview  
+This project demonstrates how to design a secure Azure network architecture, protect resources using Network Security Groups (NSGs), deploy a private Storage Account with encryption and private endpoints, and automate deployments using ARM Template Specs. It also validates security controls by testing both allowed and denied network access paths.
 
 ---
 
-### 2. Virtual Network & Subnets
-Created a VNet with two subnets:
-- `subnet-web` – for web tier
-- `subnet-database` – for private backend access  
-Service Endpoints were enabled for Microsoft.Storage on the database subnet.
-
-
-
----
-
-### 3. Network Security Group (NSG)
-An NSG was associated with the Web subnet to restrict inbound traffic:
-- Allow HTTPS (443) from the internet  
-- Optional: Allow SSH (22) from my IP  
-- All other inbound traffic is denied by default
-
-
+## 🎯 Objectives  
+- Design a Virtual Network (VNet) with isolated subnets  
+- Secure inbound traffic using Network Security Groups (NSGs)  
+- Deploy a Storage Account with **private endpoint only (no public access)**  
+- Enforce **encryption at rest**  
+- Automate deployments using **ARM Template Specs**  
+- Validate security by testing allowed vs denied access  
 
 ---
 
-### 4. Secure Storage Account (Private Endpoint)
-A Storage Account was deployed with:
-- Public network access **disabled**
-- Private Endpoint enabled to the database subnet
-This ensures the storage account is not accessible from the public internet.
+## 🧱 Architecture  
 
+**VNet Address Space:** `10.0.0.0/16`  
 
+**Subnets:**  
+- `Web` → `10.0.1.0/27`  
+- `Database` → `10.0.0.0/27`  
 
----
-
-### 5. Encryption
-Storage encryption at rest was enabled using Microsoft-managed keys (default).
-
-
-
----
-
-### 6. ARM Templates (Export & Deploy)
-The VNet and Storage Account were exported as ARM templates and deployed using Template Specs to demonstrate Infrastructure as Code awareness and repeatable deployments.
-
-
+**Security Design:**  
+- NSG attached to Web subnet  
+- HTTPS (443) allowed from Internet  
+- All other inbound traffic denied  
+- Storage Account accessible only via Private Endpoint  
+- Public access disabled  
+- Microsoft-managed encryption enabled  
 
 ---
 
-### 7. Secure Access with SAS
-A Shared Access Signature (SAS) token was generated to provide time-limited access to Blob Storage. Access was tested using Azure Storage Explorer and AzCopy.
+## 🛠️ Implementation
 
+### 1️⃣ Virtual Network & Subnets  
+Created a VNet with isolated Web and Database subnets.
+
+![VNet Subnets](screenshots/vnet-subnets.png)
 
 ---
 
-## Lessons Learned
-- How VNets and subnets provide network isolation  
-- How NSGs enforce zero-trust inbound access  
-- How Private Endpoints remove public exposure of storage  
-- How Azure encrypts data at rest by default  
-- How ARM templates enable repeatable deployments  
-- How SAS provides scoped, time-bound access to storage  
+### 2️⃣ Network Security Group (NSG)  
+Created `nsg-web` and associated it with the Web subnet.  
+Configured inbound rules to allow only HTTPS traffic from the internet.
 
-## Cleanup
-All resources were deleted at the end of the lab to avoid ongoing costs.
+![NSG Rules](screenshots/nsg-web-rules.png)
 
+---
+
+### 3️⃣ Secure Storage Account  
+Configured the storage account with:  
+- Public network access **disabled**  
+- Private Endpoint attached to Database subnet  
+- Microsoft-managed encryption enabled  
+
+![Private Endpoint](screenshots/storage-private-endpoint.png)  
+![Storage Encryption](screenshots/storage-encryption.png)
+
+---
+
+### 4️⃣ Access Control Validation (Blocked Access Test)  
+Attempting to access the storage account from the public internet is blocked by firewall rules.
+
+![Public Access Blocked](screenshots/storage-access-denied.png)
+
+---
+
+### 5️⃣ Authorized Access Test  
+Verified access is allowed when accessed via approved network paths.
+
+![Storage Access Test](screenshots/storage-access-test.png)
+
+---
+
+### 6️⃣ ARM Template Automation  
+Exported templates and deployed them using Azure Template Specs.
+
+![Template Spec Deployed](screenshots/template-spec-deployed.png)
+
+---
+
+## 🔐 Security Summary  
+
+| Control                    | Status |
+|----------------------------|--------|
+| NSG Inbound Filtering      | ✅ Enabled |
+| Public Storage Access      | ❌ Disabled |
+| Private Endpoint           | ✅ Enabled |
+| Encryption at Rest         | ✅ Enabled |
+| Network Segmentation       | ✅ VNet + Subnets |
+| Infrastructure as Code     | ✅ ARM Templates |
+
+---
+
+## 🧠 Key Learnings  
+- How NSGs control traffic at subnet level  
+- How private endpoints remove public exposure  
+- How to secure storage accounts using network isolation  
+- How ARM templates help with repeatable deployments  
+- How to validate security using access testing  
+
+---
+
+## 🧹 Cleanup (Avoid Charges)
+After completing the lab, delete the following resources:
+
+- Virtual Network  
+- Network Security Group  
+- Storage Account  
+- Private Endpoint  
+- Template Specs  
+- Resource Group  
+
+---
+
+## 📎 Skills Demonstrated  
+Azure Networking • NSGs • Private Endpoints • Secure Storage • ARM Templates • AZ-104 Skills
