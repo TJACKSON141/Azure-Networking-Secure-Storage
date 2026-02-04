@@ -3,7 +3,6 @@
 ## 📌 Overview  
 This project demonstrates how to design a secure Azure network architecture, protect resources using Network Security Groups (NSGs), deploy a private Storage Account with encryption and private endpoints, and automate deployments using ARM Template Specs. It also validates security controls by testing both allowed and denied network access paths.
 
----
 
 ## 🎯 Objectives  
 - Design a Virtual Network (VNet) with isolated subnets  
@@ -13,7 +12,6 @@ This project demonstrates how to design a secure Azure network architecture, pro
 - Automate deployments using **ARM Template Specs**  
 - Validate security by testing allowed vs denied access  
 
----
 
 ## 🧱 Architecture  
 
@@ -31,7 +29,6 @@ This project demonstrates how to design a secure Azure network architecture, pro
 - Public access disabled  
 - Microsoft-managed encryption enabled  
 
----
 
 ## 🛠️ Implementation
 
@@ -40,7 +37,6 @@ Created a VNet with isolated Web and Database subnets.
 
 ![VNet Subnets](screenshots/vnet-subnets.png)
 
----
 
 ### 2️⃣ Network Security Group (NSG)  
 Created `nsg-web` and associated it with the Web subnet.  
@@ -48,7 +44,6 @@ Configured inbound rules to allow only HTTPS traffic from the internet.
 
 ![NSG Rules](screenshots/nsg-web-rules.png)
 
----
 
 ### 3️⃣ Secure Storage Account  
 Configured the storage account with:  
@@ -59,28 +54,24 @@ Configured the storage account with:
 ![Private Endpoint](screenshots/storage-private-endpoint.png)  
 ![Storage Encryption](screenshots/storage-encryption.png)
 
----
 
 ### 4️⃣ Access Control Validation (Blocked Access Test)  
 Attempting to access the storage account from the public internet is blocked by firewall rules.
 
 ![Public Access Blocked](screenshots/storage-access-denied.png)
 
----
 
 ### 5️⃣ Authorized Access Test  
 Verified access is allowed when accessed via approved network paths.
 
 ![Storage Access Test](screenshots/storage-access-test.png)
 
----
 
 ### 6️⃣ ARM Template Automation  
 Exported templates and deployed them using Azure Template Specs.
 
 ![Template Spec Deployed](screenshots/template-spec-deployed.png)
 
----
 
 ## 🔐 Security Summary  
 
@@ -93,7 +84,6 @@ Exported templates and deployed them using Azure Template Specs.
 | Network Segmentation       | ✅ VNet + Subnets |
 | Infrastructure as Code     | ✅ ARM Templates |
 
----
 
 ## 🧠 Key Learnings  
 - How NSGs control traffic at subnet level  
@@ -102,7 +92,6 @@ Exported templates and deployed them using Azure Template Specs.
 - How ARM templates help with repeatable deployments  
 - How to validate security using access testing  
 
----
 
 ## 🧹 Cleanup (Avoid Charges)
 After completing the lab, delete the following resources:
@@ -114,7 +103,6 @@ After completing the lab, delete the following resources:
 - Template Specs  
 - Resource Group  
 
----
 
 ## 📎 Skills Demonstrated  
 Azure Networking • NSGs • Private Endpoints • Secure Storage • ARM Templates • AZ-104 Skills
