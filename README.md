@@ -1,4 +1,4 @@
-# 🚀 Project 2 – Azure Networking & Secure Storage (AZ-104)
+# 🚀 Azure Networking & Secure Storage
 
 ## 📌 Overview  
 This project demonstrates how to design a secure Azure network architecture, protect resources using Network Security Groups (NSGs), deploy a private Storage Account with encryption and private endpoints, and automate deployments using ARM Template Specs. It also validates security controls by testing both allowed and denied network access paths.
